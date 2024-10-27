@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    environment {
+        SONARQUBE_URL = 'http://192.168.50.4:9000'
+        SONAR_TOKEN = credentials('sonarqube-token')
+    }
+
+    stages {
+        stage('Cloner le projet') {
+            steps {
+                git url: 'https://github.com/MAEVALE/tp-foyer.git', branch: 'main'
+            }
+        }
+
+        stage('Nettoyer et compiler') {
+            steps {
+                dir('tp-foyer/tp-foyer') {  // Chemin vers le pom.xml
+                    sh 'mvn clean compile -e' // Ajouter -e pour des erreurs détaillées
+                }
+            }
+        }
+
+        stage('Analyse SonarQube') {
+            steps {
+                dir('tp-foyer/tp-foyer') {  // Chemin vers le pom.xml
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=tp-foyer -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONAR_TOKEN} -e' // Ajouter -e pour des erreurs détaillées
+                }
+            }
+        }
+    }
+}
