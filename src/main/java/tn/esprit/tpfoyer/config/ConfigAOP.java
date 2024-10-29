@@ -8,11 +8,15 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
 @Slf4j
+
+
 public class ConfigAOP {
 
     @Before("execution(* tn.esprit.tpfoyer.service.*.*(..))")
@@ -39,6 +43,9 @@ public class ConfigAOP {
         log.info("Methodexecutiontime: " + elapsedTime+ " milliseconds.");
         return obj;
     }
+
+    private static final Logger log = LoggerFactory.getLogger(ConfigAOP.class);
+
 
 
 }
