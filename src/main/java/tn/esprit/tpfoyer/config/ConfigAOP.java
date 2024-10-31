@@ -44,8 +44,5 @@ public class ConfigAOP {
         return obj;
     }
 
-    private static final Logger log = LoggerFactory.getLogger(ConfigAOP.class);
-
-
 
 }
