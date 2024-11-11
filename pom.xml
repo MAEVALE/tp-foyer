@@ -94,18 +94,21 @@
                 </configuration>
             </plugin>
                  <plugin>
-            <groupId>org.owasp</groupId>
-            <artifactId>dependency-check-maven</artifactId>
-            <version>6.3.2</version> <!-- Vérifiez la version la plus récente -->
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>check</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-
+        <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <version>7.1.1</version>
+        <executions>
+            <execution>
+                <goals>
+                    <goal>check</goal>
+                </goals>
+                <configuration>
+                    <format>HTML</format>  <!-- Génère un rapport HTML -->
+                    <outputDirectory>${project.build.directory}/dependency-check-report</outputDirectory>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
